@@ -131,19 +131,35 @@ async def run_scenario(real: bool) -> int:
         print(f"Session {session.session_id}")
         print(f"  dir: {session.directory}")
 
-        # Spawn mock Rasa unless --real
-        server = None
-        if not real:
-            server, _thread, mock_url = spawn_mock_rasa(port=5906)
-            rasa_half = RasaStructuredHalf(rasa_url=mock_url)
-        else:
-            rasa_half = RasaStructuredHalf()
+        # Always use mock Rasa so ex7-real only needs a Nebius key, not a live
+        # Rasa server.  The mock rejects party > 8 (party_too_large), which
+        # gives the real LLM a genuine rejection to reason about in round 2.
+        server, _thread, mock_url = spawn_mock_rasa(port=5906)
+        rasa_half = RasaStructuredHalf(rasa_url=mock_url)
 
-        client = _build_fake_client_two_rounds()
+        if real:
+            from sovereign_agent._internal.llm_client import OpenAICompatibleClient
+            from sovereign_agent.config import Config
+
+            cfg = Config.from_env()
+            print(f"  LLM: {cfg.llm_base_url} (live)")
+            print(f"  planner:  {cfg.llm_planner_model}")
+            print(f"  executor: {cfg.llm_executor_model}")
+            client: object = OpenAICompatibleClient(
+                base_url=cfg.llm_base_url,
+                api_key_env=cfg.llm_api_key_env,
+            )
+            planner_model = cfg.llm_planner_model
+            executor_model = cfg.llm_executor_model
+        else:
+            print("  LLM: FakeLLMClient (offline, scripted)")
+            client = _build_fake_client_two_rounds()
+            planner_model = executor_model = "fake"
+
         tools = build_tool_registry(session)
         loop_half = LoopHalf(
-            planner=DefaultPlanner(model="fake", client=client),
-            executor=DefaultExecutor(model="fake", client=client, tools=tools),  # type: ignore[arg-type]
+            planner=DefaultPlanner(model=planner_model, client=client),  # type: ignore[arg-type]
+            executor=DefaultExecutor(model=executor_model, client=client, tools=tools),  # type: ignore[arg-type]
         )
         bridge = HandoffBridge(
             loop_half=loop_half,
@@ -154,12 +170,16 @@ async def run_scenario(real: bool) -> int:
         try:
             result = await bridge.run(session, {"task": "book for party of 12 in Haymarket"})
         finally:
-            if server is not None:
-                server.shutdown()
+            server.shutdown()
 
         print(f"\nBridge outcome: {result.outcome}")
         print(f"  rounds: {result.rounds}")
         print(f"  summary: {result.summary}")
+
+        if real:
+            print(f"\nArtifacts persist at: {session.directory}")
+            print(f'Inspect with: ls -R "{session.directory}"')
+
         return 0 if result.outcome == "completed" else 1
 
 
