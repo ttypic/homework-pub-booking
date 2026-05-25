@@ -2,6 +2,8 @@
 
 ## Q1 — Planner handoff decision
 
+### Your answer
+
 In Ex7 session `sess_9a71258dc211` (committed to
 `traces/ex7/sess_9a71258dc211/`), round 1 of the bridge ran the loop
 half against the task "book for party of 12 in Haymarket." The planner
@@ -53,6 +55,8 @@ when its loop-half work is done and kicks the structured half.
 
 ## Q2 — Dataflow integrity catch
 
+### Your answer
+
 In Ex5 session `sess_1c341da954d4` (committed to
 `traces/ex5/sess_1c341da954d4/`), the scripted FakeLLMClient produces
 a concrete discrepancy that `verify_dataflow` handles in a revealing
@@ -98,6 +102,8 @@ unverified_facts=['£9999']` because `£9999` appears in no
 ---
 
 ## Q3 — First production failure
+
+### Your answer
 
 The first production failure I would expect is a **duplicate confirmed
 booking**, caused when the process crashes after the Rasa structured
