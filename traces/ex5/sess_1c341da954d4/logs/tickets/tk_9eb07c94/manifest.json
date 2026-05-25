@@ -1,0 +1,21 @@
+{
+  "ticket_id": "tk_9eb07c94",
+  "operation": "planner.plan",
+  "started_at": "2026-05-25T18:41:17.509659+00:00",
+  "completed_at": "2026-05-25T18:41:17.509975+00:00",
+  "duration_ms": 0,
+  "outputs": [
+    {
+      "path": "/Users/evgeny/Library/Application Support/sovereign-agent/examples/ex5-edinburgh-research/sess_1c341da954d4/logs/tickets/tk_9eb07c94/raw_output.json",
+      "sha256": "034f9fb068a44fd7cc94bf6f048596234c9f2cb8f247db9449e09483a0ff3170",
+      "size_bytes": 574,
+      "content_type": "application/json"
+    }
+  ],
+  "metrics": {
+    "num_subgoals": 2,
+    "llm_tokens_in": 10,
+    "llm_tokens_out": 10,
+    "llm_model": "fake"
+  }
+}

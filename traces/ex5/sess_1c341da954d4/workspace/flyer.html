@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edinburgh Pub Event — Haymarket Tap</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      max-width: 640px;
+      margin: 40px auto;
+      padding: 32px;
+      border: 3px solid #c8a000;
+      border-radius: 10px;
+      background: #fffdf5;
+    }
+    h1 { color: #3a1a00; text-align: center; font-size: 2em; margin-bottom: 0.3em; }
+    .subtitle { text-align: center; color: #666; margin-bottom: 2em; }
+    .section { margin: 1.2em 0; }
+    .label { font-weight: bold; color: #3a1a00; text-transform: uppercase; font-size: 0.8em; letter-spacing: 0.05em; }
+    .fact { font-size: 1.1em; margin-top: 0.2em; }
+    dl { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4em 1em; margin: 0.4em 0 0 0; }
+    dt { font-weight: bold; color: #555; }
+    dd { margin: 0; }
+    hr { border: none; border-top: 1px solid #ddd; margin: 1.5em 0; }
+  </style>
+</head>
+<body>
+  <h1>🍺 Edinburgh Pub Event</h1>
+  <p class="subtitle">You're invited!</p>
+
+  <hr>
+
+  <div class="section">
+    <div class="label">Venue</div>
+    <div class="fact" data-testid="venue_name">Haymarket Tap</div>
+    <div data-testid="venue_address">12 Dalry Rd, Edinburgh EH11 2BG</div>
+  </div>
+
+  <div class="section">
+    <div class="label">Date &amp; Time</div>
+    <div class="fact">
+      <span data-testid="date">2026-04-25</span>
+      at
+      <span data-testid="time">19:30</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="label">Party Size</div>
+    <div class="fact" data-testid="party_size">6 guests</div>
+  </div>
+
+  <hr>
+
+  <div class="section">
+    <div class="label">Weather Forecast</div>
+    <div class="fact">
+      <span data-testid="condition">cloudy</span>,
+      <span data-testid="temperature_c">12</span>°C
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section">
+    <div class="label">Cost Breakdown</div>
+    <dl>
+      <dt>Total</dt>
+      <dd data-testid="total">£540</dd>
+      <dt>Deposit Required</dt>
+      <dd data-testid="deposit">£0</dd>
+    </dl>
+  </div>
+</body>
+</html>

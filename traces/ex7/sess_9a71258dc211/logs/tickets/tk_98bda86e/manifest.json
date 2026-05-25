@@ -1,0 +1,21 @@
+{
+  "ticket_id": "tk_98bda86e",
+  "operation": "planner.plan",
+  "started_at": "2026-05-25T15:26:11.560516+00:00",
+  "completed_at": "2026-05-25T15:26:11.560768+00:00",
+  "duration_ms": 0,
+  "outputs": [
+    {
+      "path": "/Users/evgeny/Library/Application Support/sovereign-agent/examples/ex7-handoff-bridge/sess_9a71258dc211/logs/tickets/tk_98bda86e/raw_output.json",
+      "sha256": "70f5833b8ed628c42977c465c1823c325549c9b003e16728e57110af81342414",
+      "size_bytes": 239,
+      "content_type": "application/json"
+    }
+  ],
+  "metrics": {
+    "num_subgoals": 1,
+    "llm_tokens_in": 10,
+    "llm_tokens_out": 10,
+    "llm_model": "fake"
+  }
+}
